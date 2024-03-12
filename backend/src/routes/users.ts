@@ -1,17 +1,17 @@
-import express, { Request, Response } from "express";
-import User from "../models/user";
-import jwt from "jsonwebtoken";
-import { check, validationResult } from "express-validator";
+import express, { Request, Response } from 'express';
+import User from '../models/user';
+import jwt from 'jsonwebtoken';
+import { check, validationResult } from 'express-validator';
 
 const router = express.Router();
 
 router.post(
-  "/register",
+  '/register',
   [
-    check("firstName", "First Name is required").isString(),
-    check("lastName", "Last Name is required").isString(),
-    check("password", "Password is required").isString(),
-    check("email", "email is required").isString(),
+    check('firstName', 'First Name is required').isString(),
+    check('lastName', 'Last Name is required').isString(),
+    check('password', 'Password is required').isString(),
+    check('email', 'email is required').isString(),
   ],
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -23,7 +23,7 @@ router.post(
       let user = await User.findOne({ email: req.body.email });
 
       if (user) {
-        return res.status(400).json({ message: "User Already Exists" });
+        return res.status(400).json({ message: 'User Already Exists' });
       }
 
       user = new User(req.body);
@@ -32,19 +32,19 @@ router.post(
       const token = jwt.sign(
         { userId: user.id },
         process.env.JWT_SECRET_KEY as string,
-        { expiresIn: "1d" }
+        { expiresIn: '1d' }
       );
 
-      res.cookie("auth_token", token, {
+      res.cookie('auth_token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === 'production',
         maxAge: 86400000,
       });
 
-      return res.sendStatus(200);
+      return res.status(200).send({ message: 'user Registered Ok' });
     } catch (err) {
       console.log(err);
-      res.status(500).send({ message: "Something Went Wrong" });
+      res.status(500).send({ message: 'Something Went Wrong' });
     }
   }
 );
