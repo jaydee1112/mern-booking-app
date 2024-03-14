@@ -46,7 +46,10 @@ router.post(
       });
 
       res.status(200).json({ userId: user.id });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: 'Something Went Wrong' });
+    }
   }
 );
 
