@@ -21,15 +21,10 @@ export const AppContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
-  const { isError, isLoading, isFetched } = useQuery(
-    'validateToken',
-    apiClient.validateToken,
-    {
-      retry: false,
-      refetchOnWindowFocus: false,
-    }
-  );
-  console.log(isFetched, 'True');
+  const { isError } = useQuery('validateToken', apiClient.validateToken, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
   return (
     <AppContext.Provider
       value={{

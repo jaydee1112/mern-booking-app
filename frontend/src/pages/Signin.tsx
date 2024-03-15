@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import * as appiClient from '../api-clients';
 import { useAppContext } from '../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -18,9 +18,12 @@ const Signin = () => {
   const navigate = useNavigate();
   const { showToast } = useAppContext();
 
+  //invalidateQueries function is used to manually mark one or more queries as invalid. This means that the data for those queries will be considered stale, and React Query will automatically refetch the data the next time the affected query is used.
+  const queryClient = useQueryClient();
   const mutation = useMutation(appiClient.Signin, {
-    onSuccess: () => {
+    onSuccess: async () => {
       showToast({ message: 'Registeration Successful', type: 'SUCCESS' });
+      await queryClient.invalidateQueries('validateToken');
       navigate('/');
     },
     onError: (error: Error) => {
