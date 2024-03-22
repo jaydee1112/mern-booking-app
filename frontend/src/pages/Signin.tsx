@@ -22,7 +22,7 @@ const Signin = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation(appiClient.Signin, {
     onSuccess: async () => {
-      showToast({ message: 'Registeration Successful', type: 'SUCCESS' });
+      showToast({ message: 'Sign in Successful', type: 'SUCCESS' });
       await queryClient.invalidateQueries('validateToken');
       navigate('/');
     },
@@ -36,7 +36,7 @@ const Signin = () => {
   });
   return (
     <form className='flex flex-col gap-5' onSubmit={onSubmit}>
-      <h2 className='text-3xl font-bold'> Create an Account</h2>
+      <h2 className='text-3xl font-bold'> Sign in</h2>
       <div className='flex flex-col md:flex-row gap-5'>
         <label className='text-gray-700 text-sm font-bold flex-1'>
           Email
