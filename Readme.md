@@ -22,7 +22,7 @@ FRONT END
 Step 1: in package.json file, add
 "build": "tsc && vite build",
 
-Step 2: run npm build
+Step 2: npm run build
 
 Big thing, we can make a single server run both frontend and backend without using two ports.
 app.use(express.static) is a middleware function in Express.js used to serve static files such as images, CSS files, and JavaScript files.
@@ -32,7 +32,7 @@ Step 3: make express to serve the static files (our frontend folder)
 app.use(express.static(path.join(\_\_dirname, '../../frontend/dist')));
 
 cd backend > npm run build > npm start
-
+/****\*\*****Vercel only deploys for frontend****\*\*\*****/
 VERCEL build command
 cd frontend && npm install && npm run build && cd ../backend && npm run build
 
