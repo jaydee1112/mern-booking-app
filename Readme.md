@@ -32,3 +32,8 @@ Step 3: make express to serve the static files (our frontend folder)
 app.use(express.static(path.join(\_\_dirname, '../../frontend/dist')));
 
 cd backend > npm run build > npm start
+
+VERCEL build command
+cd frontend && npm install && npm run build && cd ../backend && npm run build
+
+OUTPUT directory in your vercel build configurations is frontend/dist
