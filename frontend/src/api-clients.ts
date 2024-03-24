@@ -1,7 +1,7 @@
 import { RegisterFormData } from './pages/Register';
 import { LoginFormData } from './pages/Signin';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''; //added || '' here because we are using single server, that is same port for backend and frontend
+const API_BASE_URL = ''; //added || '' here because we are using single server, that is same port for backend and frontend
 
 export const Signin = async (formData: LoginFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
