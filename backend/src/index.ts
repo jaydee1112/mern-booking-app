@@ -8,7 +8,7 @@ import hotelRoutes from './routes/my-hotels';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 //path.join takes care of handling the differences in path separators (/ or \) between operating systems, making your code more portable and reliable when working with file paths.
-
+//test comment
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
