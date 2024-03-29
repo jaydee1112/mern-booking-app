@@ -39,9 +39,6 @@ export const addHotel = async (formData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
     method: "POST",
     credentials: "include", // include any https cookies along with the request
-    headers: {
-      "Content-type": "application/json",
-    },
     body: formData,
   });
   const responseBody = await response.json();
