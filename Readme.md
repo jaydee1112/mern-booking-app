@@ -32,8 +32,14 @@ Step 3: make express to serve the static files (our frontend folder)
 app.use(express.static(path.join(\_\_dirname, '../../frontend/dist')));
 
 cd backend > npm run build > npm start
-/****\*\*****Vercel only deploys for frontend****\*\*\*****/
+/\***\*\*\*\*\***Vercel only deploys for frontend\***\*\*\*\*\*\***/
 VERCEL build command
 cd frontend && npm install && npm run build && cd ../backend && npm run build
 
 OUTPUT directory in your vercel build configurations is frontend/dist
+
+/****\*****testing postman with auth cookie****\*\*\*****/
+
+1. go to header section
+2. Add new key named Cookie
+3. Add value like this auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWYyYzJkMWVjZTdiMzRhMjIzNDAyZGIiLCJpYXQiOjE3MTE3MTQ4NTIsImV4cCI6MTcxMTgwMTI1Mn0.oHJon0za_jwar42CI5dJkvYDgprYt2TmEiO6FevjPmM

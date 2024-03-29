@@ -13,3 +13,14 @@ export const hotelTypes = [
   "Motel",
   "All Inclusive",
 ];
+
+export const hotelFacilties = [
+  "Free Wifi",
+  "Parking",
+  "Airport Shuttle",
+  "Family Rooms",
+  "Non Smoking rooms",
+  "Outdoor Pool",
+  "Spa",
+  "Fitness Center",
+];

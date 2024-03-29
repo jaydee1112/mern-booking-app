@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
-import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
-import Hotel, { HotelType } from '../models/hotel';
-import verifyToken from '../middleware/auth';
-import { body, validationResult } from 'express-validator';
+import express, { Request, Response } from "express";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+import Hotel, { HotelType } from "../models/hotel";
+import verifyToken from "../middleware/auth";
+import { body } from "express-validator";
 
 const router = express.Router();
 
@@ -17,25 +17,25 @@ const upload = multer({
 
 // api/my-hotels
 router.post(
-  '/',
+  "/",
   verifyToken,
   [
-    body('name').notEmpty().withMessage('Name is required'),
+    body("name").notEmpty().withMessage("Name is required"),
     //you might notice we are not using check function from express validator here, reason is we are not sending the data in application/json format but in formdata in this case because we had to upload the images
-    body('city').notEmpty().withMessage('City is required'),
-    body('country').notEmpty().withMessage('country is required'),
-    body('description').notEmpty().withMessage('description is required'),
-    body('type').notEmpty().withMessage('type is required'),
-    body('pricePerNight')
+    body("city").notEmpty().withMessage("City is required"),
+    body("country").notEmpty().withMessage("country is required"),
+    body("description").notEmpty().withMessage("description is required"),
+    body("type").notEmpty().withMessage("type is required"),
+    body("pricePerNight")
       .notEmpty()
       .isNumeric()
-      .withMessage('pricePerNight is required and must be a number'),
-    body('facilities')
+      .withMessage("pricePerNight is required and must be a number"),
+    body("facilities")
       .notEmpty()
       .isArray()
-      .withMessage('facilities are required'),
+      .withMessage("facilities are required"),
   ],
-  upload.array('imageFiles', 6),
+  upload.array("imageFiles", 6),
   async (req: Request, res: Response) => {
     try {
       const imageFiles = req.files as Express.Multer.File[];
@@ -43,8 +43,8 @@ router.post(
 
       //1. upload the images to cloudinary
       const uploadPromises = imageFiles.map(async (image) => {
-        const b64 = Buffer.from(image.buffer).toString('base64');
-        const dataURI = 'data:' + image.mimetype + ';base64,' + b64;
+        const b64 = Buffer.from(image.buffer).toString("base64");
+        const dataURI = "data:" + image.mimetype + ";base64," + b64;
         const res = await cloudinary.uploader.upload(dataURI);
         return res.url;
       });
@@ -62,8 +62,8 @@ router.post(
       //4. return a 201 status
       res.status(201).send(hotel);
     } catch (error) {
-      console.log('Error creating hotel', error);
-      res.status(500).json({ message: 'Something went wrong' });
+      console.log("Error creating hotel", error);
+      res.status(500).json({ message: error });
     }
   }
 );
