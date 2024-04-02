@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { LoginFormData } from "./pages/Signin";
+import { HotelType } from "../../backend/src/models/hotel"; //importing hotelType from backend, that is strange
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; //added || '' here because we are using single server, that is same port for backend and
 
@@ -45,6 +46,20 @@ export const addHotel = async (formData: FormData) => {
   if (!response.ok) {
     throw new Error(responseBody.message);
   }
+};
+
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    credentials: "include",
+    method: "GET",
+  });
+
+  const responseBody = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseBody.message);
+  }
+  return responseBody;
 };
 
 export const validateToken = async () => {
