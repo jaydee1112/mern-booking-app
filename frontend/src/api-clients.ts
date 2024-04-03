@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { LoginFormData } from "./pages/Signin";
-import { HotelType } from "../../backend/src/models/hotel"; //importing hotelType from backend, that is strange
+import { HotelType } from "../../backend/src/shared/types"; //importing hotelType from backend, that is strange
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; //added || '' here because we are using single server, that is same port for backend and
 
